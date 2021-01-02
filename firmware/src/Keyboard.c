@@ -79,7 +79,7 @@ struct KeyMapStruct
   struct { int code; int character; } mapAltGr[12];
 };
 
-const struct KeyMapStruct keyMaps[7] = {
+const struct KeyMapStruct keyMaps[8] = {
   { // US - US English
     {-1   ,-1   ,-1   ,-1   ,'a'  ,'b'  ,'c'  ,'d'  ,
      'e'  ,'f'  ,'g'  ,'h'  ,'i'  ,'j'  ,'k'  ,'l'  ,
@@ -236,6 +236,28 @@ const struct KeyMapStruct keyMaps[7] = {
     {{0x35, '\\' }, {0x1e, '|'  }, {0x1f, '@'  }, {0x21, '~'  }, 
      {0x20, '#'  }, {0x34, '{'  }, {0x2f, '['  }, {0x30, ']'  }, 
      {0x31, '}'  }, {-1,-1}}
+  }, { // PO - Portuguese PT
+    {-1   ,-1   ,-1   ,-1   ,'a'  ,'b'  ,'c'  ,'d'  ,
+     'e'  ,'f'  ,'g'  ,'h'  ,'i'  ,'j'  ,'k'  ,'l'  ,
+     'm'  ,'n'  ,'o'  ,'p'  ,'q'  ,'r'  ,'s'  ,'t'  ,
+     'u'  ,'v'  ,'w'  ,'x'  ,'y'  ,'z'  ,'1'  ,'2'  ,
+     '3'  ,'4'  ,'5'  ,'6'  ,'7'  ,'8'  ,'9'  ,'0'  ,
+     ENTER,ESC  ,BKSP ,TAB  ,' '  ,'\'' ,-1   ,'+'  ,
+     '\'' ,-1   ,'~'  ,-1   ,-1   ,'\\'  ,','  ,'.' ,
+     '-'  ,-1   ,F1   ,F2   ,F3   ,F4   ,F5   ,F6   ,
+     F7   ,F8   ,F9   ,F10  ,F11  ,F12  },
+    {-1   ,-1   ,-1   ,-1   ,'A'  ,'B'  ,'C'  ,'D'  ,
+     'E'  ,'F'  ,'G'  ,'H'  ,'I'  ,'J'  ,'K'  ,'L'  ,
+     'M'  ,'N'  ,'O'  ,'P'  ,'Q'  ,'R'  ,'S'  ,'T'  ,
+     'U'  ,'V'  ,'W'  ,'X'  ,'Y'  ,'Z'  ,'!'  ,'"'  ,
+     '#'  ,'$'  ,'%'  ,'&'  ,'/'  ,'('  ,')'  ,'='  ,
+     ENTER,ESC  ,BKSP ,TAB  ,' '  ,'?'  ,-1   ,'*'  ,
+     '`'  ,-1   ,'^'  ,-1   ,-1   ,'|'  ,';'  ,':'  ,
+     '_'  ,-1   ,F1   ,F2   ,F3   ,F4   ,F5   ,F6   ,
+     F7   ,F8   ,F9   ,F10  ,F11  ,F12  },
+    {{0x64, 0, '<'}, {0x64, 1, '>'}, {-1,-1}}, // other keys 
+    {{0x1f, '@'  }, {0x24, '{'  }, {0x25, '['  }, {0x26, ']'  }, 
+     {0x27, '}'  }, {-1,-1}} // ALTgr keys
   }
 };
 
@@ -280,7 +302,7 @@ static int mapKeyCode(USB_HID_KEYBOARD_KEYPAD keyCode)
   int i, key = -1;
   
   // find the country-specific keyboard map (default to US if unknown)
-  if( Option[O_KEYBOARD] < O_KEYBOARD_FR || Option[O_KEYBOARD] > O_KEYBOARD_ES )
+  if( Option[O_KEYBOARD] < O_KEYBOARD_FR || Option[O_KEYBOARD] > O_KEYBOARD_PO )
     map = &(keyMaps[O_KEYBOARD_US+1]);
   else
     map = &(keyMaps[Option[O_KEYBOARD]+1]);

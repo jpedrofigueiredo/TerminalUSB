@@ -43,7 +43,7 @@
 	and put under another distribution licence (including the GNU Public Licence).
 ****************************************************************************************/
 
-#define VERSION                 "1.3"                               // define the version number
+#define VERSION                 "1.4"                               // define the version number
 #define YEAR			"2014"			            // and the year
 
 // The main clock frequency for the chip
@@ -157,6 +157,7 @@ extern int Option[];
 #define O_KEYBOARD_BE	3
 #define O_KEYBOARD_UK	4
 #define O_KEYBOARD_ES	5
+#define O_KEYBOARD_PO	6
 
 // definitions related to parity
 #define O_PARITY_NONE   -1
