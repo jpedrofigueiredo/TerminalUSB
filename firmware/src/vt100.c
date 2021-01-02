@@ -98,7 +98,7 @@ void VT100Putc(char c) {
                     } else if(cmdtbl[cmd].name[i] != vtbuf[j])
                             goto nextcmd;                           // compare failed, try the next command
                 }
-                if(cmdtbl[cmd].name[i] == 0) {                      // compare succeded, we have found the command
+                if(cmdtbl[cmd].name[i] == 0) {                      // compare succeeded, we have found the command
                     vtcnt = 0;                                      // clear all chars in the queue
                     cmdtbl[cmd].fptr();                             // and execute the command
                     return;
@@ -330,27 +330,33 @@ void cmd_LEDs(void) {
     static int led1 = 0;
     static int led2 = 0;
     static int led3 = 0;
+    int i;
 
-    if(arg[0] == 0) led1 = led2 = led3 = 0;
-    if(arg[0] == 2) led1 = 1;
-    if(arg[0] == 1) led2 = 1;
-    if(arg[0] == 3) led3 = 1;
+    for (i = 0; i < argc; i++) {
+        if(arg[i] == 0) led1 = led2 = led3 = 0;
+        if(arg[i] == 2) led1 = 1;
+        if(arg[i] == 1) led2 = 1;
+        if(arg[i] == 3) led3 = 1;
+    }
     setLEDs(led1, led2, led3);
 }
 
 
 // set attributes
 void cmd_Attributes(void) {
+    int i;
     ShowCursor(false);                                              // turn off the cursor to prevent it from getting confused
-    if(arg[0] == 0) {
-        AttribUL = AttribRV = AttribInvis = 0;
-        initFont(1);
+    for (i = 0; i < argc; i++) {
+        if(arg[i] == 0) {
+            AttribUL = AttribRV = AttribInvis = 0;
+            initFont(1);
+        }
+        if(arg[i] == 4) AttribUL = 1;
+        if(arg[i] == 3) initFont(2);
+        if(arg[i] == 7) AttribRV = 1;
+        if(arg[i] == 6) initFont(3);
+        if(arg[i] == 8) AttribInvis = 1;
     }
-    if(arg[0] == 4) AttribUL = 1;
-    if(arg[0] == 3) initFont(2);
-    if(arg[0] == 7) AttribRV = 1;
-    if(arg[0] == 6) initFont(3);
-    if(arg[0] == 8) AttribInvis = 1;
 }
 
 
@@ -491,7 +497,12 @@ const struct s_cmdtbl cmdtbl[]  = {
     { "\033[Z@;@;@;@Z",  VT100,     cmd_Draw },
 
     { "\033[@m" ,       VT100,      cmd_Attributes },
+    { "\033[@;@m" ,     VT100,      cmd_Attributes },
+    { "\033[@;@;@m" ,   VT100,      cmd_Attributes },
+    { "\033[@;@;@;@m" , VT100,      cmd_Attributes },
     { "\033[@q" ,       VT100,      cmd_LEDs },
+    { "\033[@;@q" ,     VT100,      cmd_LEDs },
+    { "\033[@;@;@q" ,   VT100,      cmd_LEDs },
     { "\033c" ,         BOTH,       cmd_Reset },
     { "\033[c" ,        VT100,      cmd_VT100ID },
     { "\033[0c" ,       VT100,      cmd_VT100ID },
