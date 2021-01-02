@@ -43,7 +43,7 @@
 	and put under another distribution licence (including the GNU Public Licence).
 ****************************************************************************************/
 
-#define VERSION                 "1.3"                               // define the version number
+#define VERSION                 "1.4"                               // define the version number
 #define YEAR			"2014"			            // and the year
 
 // The main clock frequency for the chip
