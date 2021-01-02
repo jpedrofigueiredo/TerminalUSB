@@ -157,6 +157,7 @@ extern int Option[];
 #define O_KEYBOARD_BE	3
 #define O_KEYBOARD_UK	4
 #define O_KEYBOARD_ES	5
+#define O_KEYBOARD_PO	6
 
 // definitions related to parity
 #define O_PARITY_NONE   -1

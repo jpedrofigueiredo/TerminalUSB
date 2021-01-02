@@ -372,7 +372,7 @@ int GetInput(char *msg, int min, int max) {
 
 
 void SetUp(void) {
-    const char *kblang[8] = {"US", "FR", "GR", "IT", "BE", "UK", "RS" };
+    const char *kblang[9] = {"US", "FR", "GR", "IT", "BE", "UK", "RS", "PO" };
     const char *oparity[3] = {"8 NONE", "7 ODD", "7 EVEN" };
     char baud[10];
     #define NBR_SAVED   20
@@ -417,9 +417,9 @@ void SetUp(void) {
             case 'B': saved[O_PAL] = GetInput("Enter 1 for PAL or 2 for NTSC : ", '1', '2') - '2';
                       break;
             case 'C': if(vga)
-                          saved[O_KEYBOARD] = GetInput("Language 1=US, 2=FR, 3=GR, 4=IT, 5=BE, 6=UK, 7=ES : ", '1', '7') - '2';
+                          saved[O_KEYBOARD] = GetInput("Language 1=US, 2=FR, 3=GR, 4=IT, 5=BE, 6=UK, 7=ES, 8=PO : ", '1', '8') - '2';
                       else
-                          saved[O_KEYBOARD] = GetInput("1=US, 2=FR, 3=GR, 4=IT, 5=BE, 6=UK, 7=ES : ", '1', '7') - '2';
+                          saved[O_KEYBOARD] = GetInput("1=US,2=FR,3=GR,4=IT,5=BE,6=UK,7=ES,8=PO : ", '1', '8') - '2';
                       break;
             case 'D': saved[O_PARITY] = GetInput("1 = 8bit NONE, 2 = 7bit ODD, 3 = 7bit EVEN : ", '1', '7') - '2';
                       break;
